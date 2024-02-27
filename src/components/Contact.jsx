@@ -1,14 +1,10 @@
-import { useId } from "../hook/useId"
+import { useContext } from "react";
+import IdContext from "../context/IdContext";
 
 const Contact = ({ contacts, deleteCon, toggleAddUser }) => {
-  
-  const { setNewIdValue } = useId();
+  const { setIdValue } = useContext(IdContext)
 
-  const getId = (id) => {
-    console.log("Received id:", id);
-    setNewIdValue(id); // Set the id value using the custom hook
-  };
-  
+
   return (
     <section className="flex flex-col w-full mt-5 gap-5 items-center">
       {contacts.map((contact) => (
@@ -22,7 +18,7 @@ const Contact = ({ contacts, deleteCon, toggleAddUser }) => {
           <div className="text-xl sm:text-2xl flex gap-4 justify-end items-center">
             <i className="fa-solid fa-user-pen p-1 cursor-pointer" onClick={()=> {
               toggleAddUser();
-              getId(contact.id);
+              setIdValue(contact.id);
             }}></i>
             <i className="fa-solid fa-user-slash text-purple-800 cursor-pointer p-1" onClick={()=> deleteCon(contact.id)}></i>
           </div>
